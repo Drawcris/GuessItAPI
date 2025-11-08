@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace GuessIt.Model;
+namespace GuessIt.Models;
 
 public enum Role
 {

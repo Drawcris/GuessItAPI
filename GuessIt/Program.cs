@@ -1,4 +1,5 @@
 using GuessIt.Data;
+using GuessIt.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,9 +28,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("GuessItDatabase")));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddEntityFrameworkStores<AppDbContext>();
 
 var app = builder.Build();
 
@@ -41,9 +42,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
 }
 
+app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 app.UseCors(myAllowSpecificOrigins);
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();

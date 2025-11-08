@@ -1,6 +1,6 @@
+using GuessIt.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using GuessIt.Model;
 
 namespace GuessIt.Data;
 

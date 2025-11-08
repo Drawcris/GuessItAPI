@@ -1,4 +1,4 @@
-namespace GuessIt.Model;
+namespace GuessIt.Models;
 
 public class Grade
 {
