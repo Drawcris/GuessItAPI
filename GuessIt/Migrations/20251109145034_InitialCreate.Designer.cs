@@ -3,6 +3,7 @@ using System;
 using GuessIt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GuessIt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251109145034_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace GuessIt.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GuessIt.Model.Attempt", b =>
+            modelBuilder.Entity("GuessIt.Models.Attempt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +67,7 @@ namespace GuessIt.Migrations
                     b.ToTable("Attempts");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Category", b =>
+            modelBuilder.Entity("GuessIt.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,7 +90,7 @@ namespace GuessIt.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Grade", b =>
+            modelBuilder.Entity("GuessIt.Models.Grade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,7 +121,7 @@ namespace GuessIt.Migrations
                     b.ToTable("Grades");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Question", b =>
+            modelBuilder.Entity("GuessIt.Models.Question", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +164,7 @@ namespace GuessIt.Migrations
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Quiz", b =>
+            modelBuilder.Entity("GuessIt.Models.Quiz", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -222,7 +225,7 @@ namespace GuessIt.Migrations
                     b.ToTable("Quizzes");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.User", b =>
+            modelBuilder.Entity("GuessIt.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -303,7 +306,7 @@ namespace GuessIt.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("GuessIt.Model.UserQuiz", b =>
+            modelBuilder.Entity("GuessIt.Models.UserQuiz", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -466,15 +469,15 @@ namespace GuessIt.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Attempt", b =>
+            modelBuilder.Entity("GuessIt.Models.Attempt", b =>
                 {
-                    b.HasOne("GuessIt.Model.Quiz", "Quiz")
+                    b.HasOne("GuessIt.Models.Quiz", "Quiz")
                         .WithMany("Attempts")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuessIt.Model.User", "User")
+                    b.HasOne("GuessIt.Models.User", "User")
                         .WithMany("Attempts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -485,9 +488,9 @@ namespace GuessIt.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Grade", b =>
+            modelBuilder.Entity("GuessIt.Models.Grade", b =>
                 {
-                    b.HasOne("GuessIt.Model.Quiz", "Quiz")
+                    b.HasOne("GuessIt.Models.Quiz", "Quiz")
                         .WithMany("Grades")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -496,9 +499,9 @@ namespace GuessIt.Migrations
                     b.Navigation("Quiz");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Question", b =>
+            modelBuilder.Entity("GuessIt.Models.Question", b =>
                 {
-                    b.HasOne("GuessIt.Model.Quiz", "Quiz")
+                    b.HasOne("GuessIt.Models.Quiz", "Quiz")
                         .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -507,9 +510,9 @@ namespace GuessIt.Migrations
                     b.Navigation("Quiz");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Quiz", b =>
+            modelBuilder.Entity("GuessIt.Models.Quiz", b =>
                 {
-                    b.HasOne("GuessIt.Model.Category", "Category")
+                    b.HasOne("GuessIt.Models.Category", "Category")
                         .WithMany("Quizzes")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -518,15 +521,15 @@ namespace GuessIt.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.UserQuiz", b =>
+            modelBuilder.Entity("GuessIt.Models.UserQuiz", b =>
                 {
-                    b.HasOne("GuessIt.Model.Quiz", "Quiz")
+                    b.HasOne("GuessIt.Models.Quiz", "Quiz")
                         .WithMany("UserQuizzes")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuessIt.Model.User", "User")
+                    b.HasOne("GuessIt.Models.User", "User")
                         .WithMany("UserQuizzes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -548,7 +551,7 @@ namespace GuessIt.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GuessIt.Model.User", null)
+                    b.HasOne("GuessIt.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -557,7 +560,7 @@ namespace GuessIt.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GuessIt.Model.User", null)
+                    b.HasOne("GuessIt.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,7 +575,7 @@ namespace GuessIt.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuessIt.Model.User", null)
+                    b.HasOne("GuessIt.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,19 +584,19 @@ namespace GuessIt.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GuessIt.Model.User", null)
+                    b.HasOne("GuessIt.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Category", b =>
+            modelBuilder.Entity("GuessIt.Models.Category", b =>
                 {
                     b.Navigation("Quizzes");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.Quiz", b =>
+            modelBuilder.Entity("GuessIt.Models.Quiz", b =>
                 {
                     b.Navigation("Attempts");
 
@@ -604,7 +607,7 @@ namespace GuessIt.Migrations
                     b.Navigation("UserQuizzes");
                 });
 
-            modelBuilder.Entity("GuessIt.Model.User", b =>
+            modelBuilder.Entity("GuessIt.Models.User", b =>
                 {
                     b.Navigation("Attempts");
 
