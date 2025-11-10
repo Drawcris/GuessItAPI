@@ -1,9 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using GuessIt.DTOs;
-using GuessIt.Interfaces;
 using GuessIt.Repositories;
 using GuessIt.Models;
+using GuessIt.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

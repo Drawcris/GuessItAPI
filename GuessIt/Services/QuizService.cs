@@ -2,7 +2,7 @@ using GuessIt.Models;
 using GuessIt.Repositories;
 using GuessIt.DTOs;
 using System.Linq;
-using GuessIt.Interfaces;
+using GuessIt.Repositories.Interfaces;
 
 namespace GuessIt.Services;
 

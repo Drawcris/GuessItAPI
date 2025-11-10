@@ -1,7 +1,7 @@
 using GuessIt.Models;
 using GuessIt.Data;
 using GuessIt.DTOs;
-using GuessIt.Interfaces;
+using GuessIt.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 
 namespace GuessIt.Repositories;

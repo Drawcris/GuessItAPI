@@ -1,6 +1,6 @@
 using GuessIt.Models;
 
-namespace GuessIt.Interfaces;
+namespace GuessIt.Repositories.Interfaces;
 
 public interface IQuizRepository
 {

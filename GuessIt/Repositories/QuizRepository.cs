@@ -1,6 +1,6 @@
 using GuessIt.Data;
-using GuessIt.Interfaces;
 using GuessIt.Models;
+using GuessIt.Repositories.Interfaces;
 
 
 namespace GuessIt.Repositories;

@@ -1,6 +1,6 @@
 using GuessIt.Models;
 using GuessIt.Data;
-using GuessIt.Interfaces;
+using GuessIt.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuessIt.Repositories;
