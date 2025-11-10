@@ -1,5 +1,6 @@
 using GuessIt.Models;
-namespace GuessIt.Repositories;
+
+namespace GuessIt.Interfaces;
 
 public interface ICategoryRepository
 {

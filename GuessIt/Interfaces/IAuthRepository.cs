@@ -1,6 +1,7 @@
-namespace GuessIt.Repositories;
 using GuessIt.Models;
 using Microsoft.AspNetCore.Identity;
+
+namespace GuessIt.Interfaces;
 
 public interface IAuthRepository
 {
