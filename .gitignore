@@ -1,0 +1,4 @@
+# Ignore C# build artifacts
+bin/
+obj/
+obj/
