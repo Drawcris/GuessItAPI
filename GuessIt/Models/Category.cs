@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 namespace GuessIt.Models;
 
 public class Category
@@ -8,5 +9,6 @@ public class Category
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
     
+    [JsonIgnore]
     public ICollection<Quiz> Quizzes { get; set; } = new List<Quiz>();
 }

@@ -69,10 +69,12 @@ public class AuthService
     public async Task<string> GenerateJwtTokenAsync(string email)
     {
         var user = await _authRepository.GetUserByEmailAsync(email);
+        
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim("Role", user.RoleType.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };

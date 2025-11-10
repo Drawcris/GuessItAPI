@@ -101,6 +101,12 @@ builder.Services.AddIdentity<User, IdentityRole>()
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<AuthService>();
 
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+builder.Services.AddScoped<QuizService>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<CategoryService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

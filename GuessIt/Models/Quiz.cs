@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 namespace GuessIt.Models;
 
 
@@ -6,7 +8,7 @@ public class Quiz
     public int Id { get;set; }
     public string Title { get;set; }
     public string Description { get;set; }
-    public string ImageUrl { get;set; }
+    public string? ImageUrl { get;set; }
     public string CreatorId { get;set; }
     public int CategoryId { get;set; }
     public int NumberOfQuestions { get;set; }
@@ -20,10 +22,15 @@ public class Quiz
     public DateTime CreatedAt { get;set; }
     public DateTime UpdatedAt { get;set; }
     
+    [JsonIgnore]
     public Category Category { get;set; }
+    [JsonIgnore]
     public ICollection<UserQuiz> UserQuizzes { get;set; }
+    [JsonIgnore]
     public ICollection<Attempt> Attempts { get;set; }
+    [JsonIgnore]
     public ICollection<Question> Questions { get;set; }
+    [JsonIgnore]
     public ICollection<Grade> Grades { get;set; }
     
     public Quiz()
