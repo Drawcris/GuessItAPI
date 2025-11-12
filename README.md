@@ -1,4 +1,4 @@
-# 📊 GuessIT — Test management application
+# 📊 GuessIT — **IN DEVELOPEMENT**
 
 ### This application is an online test management system designed to create, assign, and evaluate quizzes and exams efficiently. It provides tools for managing users, creating tests and questions, conducting test sessions, and analyzing results.
 
