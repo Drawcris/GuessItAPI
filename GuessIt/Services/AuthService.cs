@@ -131,5 +131,10 @@ public class AuthService
         };
         return profile;
     }
+    
+    public async Task<IQueryable<User?>> GetAllUsersAsync()
+    {
+        return await _authRepository.GetAllUsers();
+    }
 
 }

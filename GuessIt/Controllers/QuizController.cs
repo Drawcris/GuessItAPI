@@ -47,7 +47,7 @@ namespace GuessIt.Controllers
         
         [HttpPost("create-quiz")]
         [Authorize]
-        public async Task<IActionResult> CreateQuiz([FromBody] CreateQuizDTO quizDto)
+        public async Task<IActionResult> CreateQuiz([FromForm] CreateQuizDTO quizDto, IFormFile? imageFile)
         {
             var creatorId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             
@@ -56,7 +56,8 @@ namespace GuessIt.Controllers
                 return Unauthorized("User ID not found in token.");
             }
             
-            var result = await _quizService.CreateQuiz(quizDto, creatorId);
+            
+            var result = await _quizService.CreateQuiz(quizDto, creatorId, imageFile);
             return CreatedAtAction(nameof(GetQuizById), new { id = result.Id }, result);
         }
 

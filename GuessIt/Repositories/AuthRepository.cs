@@ -36,5 +36,9 @@ public class AuthRepository : IAuthRepository
         return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
     }
     
-    
+    public async Task<IQueryable<User?>> GetAllUsers()
+    {
+        var users = _userManager.Users.AsQueryable();
+        return await Task.FromResult(users);
+    }
 }

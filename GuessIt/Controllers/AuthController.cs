@@ -84,10 +84,14 @@ namespace GuessIt.Controllers
                 message: "Profile fetched successfully", 
                 data: profile);
             
-            
             return Ok(result);
+        }
 
-
+        [HttpGet("get-all-users")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _authService.GetAllUsersAsync();
+            return Ok(users);
         }
     }
 }

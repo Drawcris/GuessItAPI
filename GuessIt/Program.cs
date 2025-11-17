@@ -10,6 +10,7 @@ using System.Text;
 using GuessIt.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.FileProviders;
 
 var myAllowSpecificOrigins = "myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -99,6 +100,8 @@ builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<UploadFileService>();
+
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<AuthService>();
 
@@ -108,7 +111,22 @@ builder.Services.AddScoped<QuizService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<CategoryService>();
 
+builder.Services.AddScoped<IUserQuizRepository, UserQuizRepository>();
+builder.Services.AddScoped<UserQuizService>();
+
 var app = builder.Build();
+
+var uploadsPath = Path.Combine(builder.Environment.ContentRootPath, "Uploads");
+if (!Directory.Exists(uploadsPath))
+{
+    Directory.CreateDirectory(uploadsPath);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsPath),
+    RequestPath = "/Uploads"
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -118,9 +136,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseCors(myAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();
