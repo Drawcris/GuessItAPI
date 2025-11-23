@@ -58,4 +58,10 @@ public class QuizRepository : IQuizRepository
         await _context.SaveChangesAsync();
         return quiz;
     }
+
+    public async Task<IQueryable<Question>> GetQuestionsInQuiz(int quizId)
+    {
+        var questions =  _context.Questions.Where(x => x.QuizId == quizId).AsQueryable();
+        return await Task.FromResult(questions);
+    }
 }

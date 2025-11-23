@@ -100,5 +100,16 @@ namespace GuessIt.Controllers
             var result = await _quizService.DeleteQuizAsync(id);
             return Ok(result);
         }
+
+        [HttpGet("get-questions-in-quiz/{quizId}")]
+        public async Task<IActionResult> GetQuestionsInQuiz(int quizId)
+        {
+            var result = await _quizService.GetQuestionsInQuiz(quizId);
+            if (!System.Linq.Enumerable.Any(result))
+            {
+                return NotFound("No questions found in this quiz.");
+            }
+            return Ok(result);
+        }
     }
 }

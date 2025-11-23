@@ -112,9 +112,9 @@ public class AuthService
 
         return (false, "Failed to change password.");
     }
-    public async Task<Dictionary<string, string>?> MyProfileAsync(string email)
+    public async Task<Dictionary<string, string>?> MyProfileAsync(string userId)
     {
-        var user = await _authRepository.GetUserByEmailAsync(email);
+        var user = await _authRepository.GetUserByIdAsync(userId);
         if (user == null)
         {
             return null;
@@ -122,6 +122,7 @@ public class AuthService
 
         var profile = new Dictionary<string, string>
         {
+            {"UserId", user.Id },
             { "FirstName", user.FirstName },
             { "LastName", user.LastName },
             { "Email", user.Email },

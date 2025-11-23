@@ -9,4 +9,5 @@ public interface IQuizRepository
     public Task<Quiz> CreateQuiz(Quiz quiz);
     public Task<Quiz> UpdateQuiz(int id, Quiz quiz);
     public Task<Quiz?> DeleteQuizAsync(int id);
+    public Task<IQueryable<Question>> GetQuestionsInQuiz(int quizId);
 }

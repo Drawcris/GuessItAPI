@@ -49,7 +49,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: myAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:3000")
+                          policy.WithOrigins("http://localhost:4200")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                       });
@@ -113,6 +113,9 @@ builder.Services.AddScoped<CategoryService>();
 
 builder.Services.AddScoped<IUserQuizRepository, UserQuizRepository>();
 builder.Services.AddScoped<UserQuizService>();
+
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<QuestionService>();
 
 var app = builder.Build();
 

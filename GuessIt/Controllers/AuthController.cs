@@ -24,7 +24,7 @@ namespace GuessIt.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterDTO dto)
+        public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
             var result = await _authService.RegisterAsync(dto);
             if (!result.Success)
@@ -36,7 +36,7 @@ namespace GuessIt.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm] LoginDTO dto)
+        public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var result = await _authService.LoginAsync(dto);
             if (!result.Success)
@@ -71,13 +71,13 @@ namespace GuessIt.Controllers
         [Authorize]
         public async Task<IActionResult> GetProfile()
         {
-            var userEmail = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if (userEmail == null)
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
             {
-                return Unauthorized("User email not found in token.");
+                return Unauthorized("User not found in token.");
             }
 
-            var profile = await _authService.MyProfileAsync(userEmail);
+            var profile = await _authService.MyProfileAsync(userId);
 
             var result = new ApiResponse<Dictionary<string, string?>>(
                 success: true, 

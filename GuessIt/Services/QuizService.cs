@@ -76,4 +76,9 @@ public class QuizService
     {
         return await _quizRepository.DeleteQuizAsync(id);
     }
+    
+    public async Task<IQueryable<Question>> GetQuestionsInQuiz(int quizId)
+    {
+        return await _quizRepository.GetQuestionsInQuiz(quizId);
+    }
 }
